@@ -41,7 +41,7 @@ const Signup = () => {
     try {
       await signInAnonymously(auth);
       toast.success("Logged in as Guest");
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       toast.error(err.message || "Guest login failed");
     }

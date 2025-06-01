@@ -19,7 +19,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
       toast.success("Login successful!");
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       toast.error(err.message || "Login failed");
     }
@@ -56,7 +56,7 @@ const Login = () => {
 
       <div className="forgot-password">
         Don&apos;t have an account?{" "}
-        <span onClick={() => navigate("/signup")} style={{ cursor: "pointer" }}>
+        <span onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
           Sign Up
         </span>
       </div>
