@@ -5,24 +5,23 @@ import "./LoginSignup.css";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleLogin = async () => {
-    setError("");
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      // After successful login, navigate to home page
+      toast.success("Login successful!");
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message || "Login failed");
     }
   };
 
@@ -54,13 +53,14 @@ const Login = () => {
           />
         </div>
       </div>
-      {error && <div style={{ color: "red", marginLeft: "40px" }}>{error}</div>}
+
       <div className="forgot-password">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <span onClick={() => navigate("/signup")} style={{ cursor: "pointer" }}>
           Sign Up
         </span>
       </div>
+
       <div className="submit-container">
         <div className="submit" onClick={handleLogin}>
           Login

@@ -9,6 +9,7 @@ import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -17,33 +18,32 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSignup = async () => {
-    setError("");
     try {
       await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+      toast.success("Signup successful!");
       navigate("/login");
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message || "Signup failed");
     }
   };
 
   const handleGuestLogin = async () => {
-    setError("");
     try {
       await signInAnonymously(auth);
+      toast.success("Logged in as Guest");
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message || "Guest login failed");
     }
   };
 
@@ -87,12 +87,6 @@ const Signup = () => {
         </div>
       </div>
 
-      {error && (
-        <div style={{ color: "red", marginLeft: "40px", marginTop: "10px" }}>
-          {error}
-        </div>
-      )}
-
       <div className="forgot-password">
         Already have an account?{" "}
         <span onClick={() => navigate("/login")} style={{ cursor: "pointer" }}>
@@ -104,7 +98,6 @@ const Signup = () => {
         <div className="submit" onClick={handleSignup}>
           Sign Up
         </div>
-        
         <div className="submit gray" onClick={handleGuestLogin}>
           Continue as Guest
         </div>
