@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import {
   createUserWithEmailAndPassword,
+  updateProfile,
   signInAnonymously,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import "./LoginSignup.css";
 import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
@@ -25,11 +27,25 @@ const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+
+      // Update display name in Firebase Auth profile
+      await updateProfile(user, {
+        displayName: formData.name,
+      });
+
+      // Save user data in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: formData.name,
+        email: formData.email,
+        createdAt: new Date(),
+      });
+
       toast.success("Signup successful!");
       navigate("/login");
     } catch (err) {
