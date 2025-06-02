@@ -13,15 +13,12 @@
 }
 
 body, html {
-  height: 100vh; /* full viewport height */
+  height: 100vh;
   margin: 0;
-  display: flex;
-  justify-content: center;  /* horizontal center */
-  align-items: center;      /* vertical center */
-  background-color: #f0f0f0; /* optional background */
+  padding: 0;
+  background-color: #f0f0f0;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-
 a {
   font-weight: 500;
   color: #646cff;
