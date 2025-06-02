@@ -1,3 +1,14 @@
+/* Centering container on page */
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 .container {
   display: flex;
   flex-direction: column;

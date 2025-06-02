@@ -6,6 +6,7 @@
   width: 100%;
   min-height: 100vh;
   background-color: #f4f4f4;
+  display: block; /* avoid accidental flex layout */
 }
 
 /* You can keep these for any additional app-wide styles if needed */

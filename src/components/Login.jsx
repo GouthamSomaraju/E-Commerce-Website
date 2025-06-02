@@ -26,6 +26,7 @@ const Login = () => {
   };
 
   return (
+    <div className="page-wrapper">
     <div className="container">
       <div className="header">
         <div className="text">Login</div>
@@ -66,6 +67,7 @@ const Login = () => {
           Login
         </div>
       </div>
+    </div>
     </div>
   );
 };
